@@ -3,7 +3,7 @@
 # Variables
 PYTHON := python3
 PIP := pip
-DOCKER_IMAGE := "Pawnshop"
+DOCKER_IMAGE := "pawnshop"
 
 install:
 	$(PIP) install -r requirements.txt
@@ -18,5 +18,5 @@ docker-build:
 	$(DOCKER) build -t $(DOCKER_IMAGE) .
 
 docker-run:
-	$(DOCKER) run -dit -p 5000:5000 $(DOCKER_IMAGE)
+	$(DOCKER) run -dit -p 8080:8080 $(DOCKER_IMAGE)
 
