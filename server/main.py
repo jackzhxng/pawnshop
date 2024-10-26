@@ -1,20 +1,22 @@
 from flask import Flask, jsonify, request
-from llm.inference import LLM
+from llm.agent import LLMAgent
 
 
 app = Flask(__name__)
-llm = LLM()
+llm = LLMAgent()
+
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+    return "Hello World!"
 
-@app.route("/api/infer")
+
+@app.route("/chat")
 def inference():
-    prompt = request.args.get("prompt")
-    print(f"Prompt submitted: {prompt}")
-    res = llm.infer(prompt)
+    message = request.args.get("message")
+    res = llm.generate_chat(message)
     return res
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
