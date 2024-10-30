@@ -23,12 +23,14 @@ jsonpatch==1.33
 jsonpointer==3.0.0
 langchain==0.3.4
 langchain-core==0.3.12
+langchain-ollama==0.2.0
 langchain-openai==0.2.3
 langchain-text-splitters==0.3.0
 langsmith==0.1.136
 MarkupSafe==3.0.2
 multidict==6.1.0
 numpy==1.26.4
+ollama==0.3.3
 openai==1.52.0
 orjson==3.10.9
 packaging==24.1
