@@ -1,4 +1,4 @@
-system_prompt = """
+system_prompt = f"""
 You are an AI agent acting as Erik Stoneforge, a shrewd adventurer-merchant. You will interact with a shopkeeper using only the available action functions to negotiate sales of your items. Stay in character while selecting actions that align with Erik's personality and goals.
 
 CHARACTER PROFILE:
@@ -48,49 +48,59 @@ KEY NEGOTIATION TACTICS:
 - Bundle items only if individual item values are properly recognized
 - Walk away if premium items (dagger, amulet) are treated as common goods
 
-You must use the provided action functions to interact with the shopkeeper. Select tools that best represent Erik's character and goals while following his negotiation style and priorities.
+You may use the provided action functions to interact with the shopkeeper. Select tools that best represent Erik's character and goals while following his negotiation style and priorities.
 """
 
-template = """
-<|start_header_id|>system<|end_header_id|>
-
-{{ if .System }}{{ .System }}
+prompt_template = """
+{{ if .System }}
+    {{ .System }}
 {{- end }}
-{{- if .Tools }}When you receive a tool call response, use the output to format an answer to the orginal user question.
 
-{{- end }}<|eot_id|>
+{{- if .Tools }}
+    When you receive a tool call response, use the output to format an answer to the orginal user question.
+{{- end }}
+<|eot_id|>
+
 {{- range $i, $_ := .Messages }}
-{{- $last := eq (len (slice $.Messages $i)) 1 }}
-{{- if eq .Role "user" }}<|start_header_id|>user<|end_header_id|>
-{{- if and $.Tools $last }}
+    {{- $last := eq (len (slice $.Messages $i)) 1 }}
+    
+    {{- if eq .Role "user" }}
+        <|start_header_id|>user<|end_header_id|>
 
-Given the following functions, please respond with a JSON for a function call with its proper arguments that best answers the given prompt, or respond with a message if no function is needed.
+        {{- if and $.Tools $last }}
+            Given the following functions, please respond with a JSON for a function call with its proper arguments that best answers the given prompt, or respond with a message if no function is needed.
 
 If responding with a function call, use the format {"name": function name, "parameters": dictionary of argument name and its value}. Do not use variables.
-
-{{ range $.Tools }}
-{{- . }}
-{{ end }}
-{{ .Content }}<|eot_id|>
-{{- else }}
-
-{{ .Content }}<|eot_id|>
-{{- end }}{{ if $last }}<|start_header_id|>assistant<|end_header_id|>
-
-{{ end }}
-{{- else if eq .Role "assistant" }}<|start_header_id|>assistant<|end_header_id|>
-{{- if .ToolCalls }}
-{{ range .ToolCalls }}
-{"name": "{{ .Function.Name }}", "parameters": {{ .Function.Arguments }}}{{ end }}
-{{- else }}
-
-{{ .Content }}
-{{- end }}{{ if not $last }}<|eot_id|>{{ end }}
-{{- else if eq .Role "tool" }}<|start_header_id|>ipython<|end_header_id|>
-
-{{ .Content }}<|eot_id|>{{ if $last }}<|start_header_id|>assistant<|end_header_id|>
-
-{{ end }}
-{{- end }}
+            {{ range $.Tools }}
+                {{- . }}
+            {{ end }}
+            {{ .Content }}<|eot_id|>
+        {{- else }}
+            {{ .Content }}<|eot_id|>
+        {{- end }}
+        {{ if $last }}
+            <|start_header_id|>assistant<|end_header_id|>
+        {{ end }}
+        
+    {{- else if eq .Role "assistant" }}
+        <|start_header_id|>assistant<|end_header_id|>
+        {{- if .ToolCalls }}
+            {{ range .ToolCalls }}
+                {"name": "{{ .Function.Name }}", "parameters": {{ .Function.Arguments }}}
+            {{ end }}
+        {{- else }}
+            {{ .Content }}
+        {{- end }}
+        {{ if not $last }}
+            <|eot_id|>
+        {{ end }}
+        
+    {{- else if eq .Role "tool" }}
+        <|start_header_id|>ipython<|end_header_id|>
+        {{ .Content }}<|eot_id|>
+        {{ if $last }}
+            <|start_header_id|>assistant<|end_header_id|>
+        {{ end }}
+    {{- end }}
 {{- end }}
 """

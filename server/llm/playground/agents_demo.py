@@ -1,9 +1,13 @@
-import os
+"""
+Proof of concept to demonstrate how tool-caling agents work.
+"""
 
 from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage
 from langchain.tools import tool
+from langchain_community.chat_models import ChatLlamaCpp
 from langchain_openai import ChatOpenAI
+
 
 load_dotenv()
 OPENAI_KEY = os.getenv("OPENAI_KEY")
@@ -30,14 +34,25 @@ def run(destination: str):
 
 @tool
 def search_distance(destination: str):
-    ""n
+    """
     Find out how far from the user the destination is in miles.
     """
     print(f"I AM SEARCHING HOW LONG IT TAKES TO GET TO {destination}")
     return 6
 
+# # For OpenAI LLM.
+# llm = ChatOpenAI(api_key=OPENAI_KEY, model="gpt-4-turbo")
 
-llm = ChatOpenAI(api_key=OPENAI_KEY, model="gpt-4-turbo")
+# For local LLM running with Ollama.
+llm = ChatLlamaCpp(
+    model_path="../models/Meta-Llama-3.1-8B-Instruct-Q5_K_M.gguf",
+    # temperature=0.75,
+    max_tokens=2000,
+    top_p=0.95,
+    # verbose=True,  # Verbose is required to pass to the callback manager
+    verbose=False,
+)
+
 
 tools = [walk, run, search_distance]
 model_with_tools = llm.bind_tools(tools)
@@ -59,3 +74,4 @@ for tool_call in ai_msg.tool_calls:
 ai_msg = model_with_tools.invoke(messages)
 messages.append(ai_msg)
 print(messages)
+
