@@ -1,5 +1,6 @@
 server/**/__pycache__
 server/.venv
-server/\#*
 server/\.*
 server/models
+**/\#*
+**/*.ipynb
