@@ -13,7 +13,7 @@ run:
 	$(PYTHON) main.py
 
 venv:
-	echo "Run \"source .venv/bin/activate\" to activate the virtual environment."
+	@echo "Run \"source .venv/bin/activate\" to activate the virtual environment."
 
 docker-build:
 	$(DOCKER) build -t $(DOCKER_IMAGE) .
