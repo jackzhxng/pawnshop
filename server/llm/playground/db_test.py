@@ -14,7 +14,7 @@ from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 # embeddings = OllamaEmbeddings(
 #     model="llama3.2",
 # )
-
+#
 # According to https://python.langchain.com/api_reference/huggingface/embeddings/langchain_huggingface.embeddings.huggingface.HuggingFaceEmbeddings.html:
 # Default model name is "sentence-transformers/all-mpnet-base-v2"
 model_kwargs = {'trust_remote_code': True}
