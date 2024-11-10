@@ -1,3 +1,4 @@
+import pickle
 import faiss
 from sentence_transformers import SentenceTransformer
 
@@ -29,6 +30,17 @@ class VectorStore():
             result.append(self.docs[I[0][i]])
         return result
 
+    @staticmethod
+    def save(vector_store, filename):
+        file = open(filename, 'wb')
+        pickle.dump(vector_store, file)
+        file.close()
+
+    @staticmethod
+    def load(filename): 
+        file = open(filename, 'rb')
+        return pickle.load(file)
+
 
 
 
@@ -37,3 +49,7 @@ v.add_documents("foo", "bar")
 v.similarity_search("hi", 3)
 v.add_documents("hello", "world")
 print(v.similarity_search("hi", 3))
+VectorStore.save(v, "vectorstore.pkl")
+
+v2 = VectorStore.load("vectorstore.pkl")
+print(v2.similarity_search("hi", 3))
