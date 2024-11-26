@@ -8,17 +8,14 @@ name: Eric Stonehenge
 """
 
 CUSTOMER_AGENT_BASE_TOOLS = [
-    actions.make_offer,
-    # actions.inspect_item,
-    actions.negotiate_terms,
-    # actions.social_action,
-    actions.conclude_interaction
+    # actions.buy,
+    actions.sell,
+    actions.leave_shop,
 ]
 
 def create_agent_from_yaml(yaml_str: str) -> LLMAgent:
     yaml = yaml.load(yaml_str)
-    return LLMAgent(get_default_llm(), CUSTOMER_AGENT_BASE_TOOLS)
-    
+    return LLMAgent(get_default_llm(), CUSTOMER_AGENT_BASE_TOOLS)    
 
 def create_test_agent() -> LLMAgent:
     return LLMAgent(get_default_llm(), CUSTOMER_AGENT_BASE_TOOLS)

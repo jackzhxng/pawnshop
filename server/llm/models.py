@@ -5,7 +5,7 @@ Different models that we have tried out / are using.
 import os
 
 from langchain_ollama.chat_models import ChatOllama
-from llm.prompts import prompt_template
+# from llm.prompts import prompt_template
 
 
 """Default"""
@@ -40,6 +40,6 @@ def get_llama_3_2_3b():
         f16_kv=True,  # MUST set to True, otherwise you will run into problem after a couple of calls.
         verbose=True,  # Verbose is required to pass to the callback manager.
         n_gpu_layers=n_gpu_layers,
-        template=prompt_template
+        # template=prompt_template,
     )
 
