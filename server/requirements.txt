@@ -9,7 +9,6 @@ certifi==2024.8.30
 charset-normalizer==3.4.0
 click==8.1.7
 distro==1.9.0
-faiss-cpu==2.1.2
 Flask==3.0.3
 frozenlist==1.4.1
 greenlet==3.1.1
@@ -22,12 +21,12 @@ Jinja2==3.1.4
 jiter==0.6.1
 jsonpatch==1.33
 jsonpointer==3.0.0
-langchain==0.3.4
-langchain-core==0.3.12
-langchain_huggingface==0.1.2
+langchain
+langchain-core
+langchain_huggingface
 langchain-ollama==0.2.0
 langchain-openai==0.2.3
-langchain-text-splitters==0.3.0
+langchain-text-splitters
 langsmith==0.1.136
 MarkupSafe==3.0.2
 multidict==6.1.0

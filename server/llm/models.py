@@ -10,7 +10,7 @@ from langchain_ollama.chat_models import ChatOllama
 
 """Default"""
 def get_default_llm():
-    return get_llama_3_2_3b()
+    return get_open_ai_llm()
 
 
 """Cloud"""
