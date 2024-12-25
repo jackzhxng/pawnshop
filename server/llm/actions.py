@@ -9,17 +9,17 @@ from typing import Dict, Literal
 from pydantic import BaseModel, Field
 
 
-# @tool
-# def buy(
-#     item: str,
-#     price: int,
-#     quantity: int,
-# ) -> bool:
-#     """
-#     Buys a specified number of the specified item at the specified price.
-#     """
-#     # Some database call here.
-#     return True
+@tool
+def buy(
+    item: str,
+    price: int,
+    quantity: int,
+) -> bool:
+    """
+    Buys a specified number of the specified item at the specified price.
+    """
+    # Some database call here.
+    return True
 
 class SellInput(BaseModel):
     item: str = Field(description="The name of the item being sold (e.g., 'Iron Sword')")
@@ -44,7 +44,9 @@ def leave_shop() -> bool:
 
 # Tools that must be executed by the client (Godot) instead of locally on the server.
 # These names should be lowercased and match tool_call["name"].
-REMOTE_TOOLS = {"get_inventory"}
+# Mark shop-interaction tools remote so the Godot client executes them and
+# returns structured results back to the server.
+REMOTE_TOOLS = {"get_inventory", "sell", "buy", "leave_shop"}
 
 @tool
 def get_inventory(npc_id: str) -> str:

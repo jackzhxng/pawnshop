@@ -58,12 +58,10 @@ class LLMAgent:
         """
         # NOTE: messages are kept in the agent instance; for multi-session support,
         # a per-session agent instance should be used (main.py ensures session mapping).
-        self.messages.append(HumanMessage(input_message))
-        logger.debug(f"Generating responses with messages: {self.messages}")
-        generated_messages = []
-        # ai_thought_msg = self.generate_chat_response(self.messages)
-        # self.messages.append(ai_thought_msg)
-        # return ai_thought_msg.content
+        if (input_message != ""):
+            self.messages.append(HumanMessage(input_message))
+            logger.debug(f"Generating responses with messages: {self.messages}")
+            generated_messages = []
         
         for i in range(MAX_RETRIES):
             try:

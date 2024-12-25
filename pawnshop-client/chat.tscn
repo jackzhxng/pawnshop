@@ -2,17 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cy4swtugnxknx" path="res://ChatManager.gd" id="1_jqtso"]
 [ext_resource type="StyleBox" uid="uid://b1pevdelgl7b" path="res://stylebox_flat.tres" id="2_1vink"]
-[ext_resource type="Texture2D" uid="uid://bgbfr7yc5ehau" path="res://sprites/mushroom.png" id="3_q58uj"]
-[ext_resource type="FontFile" uid="uid://82x8k5m852tm" path="res://NotoSans-VariableFont_wdth,wght.ttf" id="4_6kg6q"]
-[ext_resource type="Texture2D" uid="uid://5620fihcc10p" path="res://sprites/pepe.png" id="5_fg4y7"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lhx1l"]
-atlas = ExtResource("3_q58uj")
-region = Rect2(0, 0, 70, 70)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4f42x"]
-atlas = ExtResource("5_fg4y7")
-region = Rect2(0, 0, 78, 78)
+[ext_resource type="Script" uid="uid://bst1ym8fwstma" path="res://CharacterPortrait.gd" id="3_6kg6q"]
+[ext_resource type="Texture2D" uid="uid://emdbsrqeydi2" path="res://character_sprites/Masculine_A_default.png" id="4_fg4y7"]
+[ext_resource type="FontFile" uid="uid://cigy8hxwtcr72" path="res://Minecraft.ttf" id="5_jqtso"]
 
 [node name="HTTPExample" type="Node2D" unique_id=395514784 node_paths=PackedStringArray("send_button", "text_input")]
 script = ExtResource("1_jqtso")
@@ -57,10 +49,60 @@ theme_override_styles/panel = ExtResource("2_1vink")
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/CharacterPanelRight" unique_id=877277358]
 layout_mode = 2
 
-[node name="CharacterImage" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/CharacterPanelRight/VBoxContainer" unique_id=81015390]
-custom_minimum_size = Vector2(100, 200)
+[node name="CharacterPortrait" type="Control" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/CharacterPanelRight/VBoxContainer" unique_id=1076499406]
+custom_minimum_size = Vector2(64, 192)
 layout_mode = 2
-texture = SubResource("AtlasTexture_lhx1l")
+script = ExtResource("3_6kg6q")
+
+[node name="CharacterImage" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/CharacterPanelRight/VBoxContainer/CharacterPortrait" unique_id=81015390]
+custom_minimum_size = Vector2(100, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -100.0
+offset_right = 114.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_fg4y7")
+stretch_mode = 5
+flip_h = true
+
+[node name="HairImage" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/CharacterPanelRight/VBoxContainer/CharacterPortrait" unique_id=102495392]
+custom_minimum_size = Vector2(100, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -100.0
+offset_right = 114.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+flip_h = true
+
+[node name="BeardImage" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/CharacterPanelRight/VBoxContainer/CharacterPortrait" unique_id=1358174138]
+custom_minimum_size = Vector2(100, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -100.0
+offset_right = 114.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
 stretch_mode = 5
 flip_h = true
 
@@ -89,7 +131,7 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 theme_override_colors/default_color = Color(0.2, 0.2, 0.2, 1)
-theme_override_fonts/normal_font = ExtResource("4_6kg6q")
+theme_override_fonts/normal_font = ExtResource("5_jqtso")
 bbcode_enabled = true
 text = "..."
 
@@ -118,11 +160,64 @@ theme_override_styles/panel = ExtResource("2_1vink")
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/CharacterPanelLeft" unique_id=1506043792]
 layout_mode = 2
 
-[node name="CharacterImage" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/CharacterPanelLeft/VBoxContainer" unique_id=1785556402]
-custom_minimum_size = Vector2(100, 200)
+[node name="CharacterPortrait" type="Control" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/CharacterPanelLeft/VBoxContainer" unique_id=1766891259]
+custom_minimum_size = Vector2(64, 192)
 layout_mode = 2
-texture = SubResource("AtlasTexture_4f42x")
+script = ExtResource("3_6kg6q")
+character_variation = "B"
+hair_variation = "B"
+
+[node name="CharacterImage" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/CharacterPanelLeft/VBoxContainer/CharacterPortrait" unique_id=919184875]
+custom_minimum_size = Vector2(100, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -100.0
+offset_right = 114.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_fg4y7")
 stretch_mode = 5
+flip_h = true
+
+[node name="HairImage" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/CharacterPanelLeft/VBoxContainer/CharacterPortrait" unique_id=1254998649]
+custom_minimum_size = Vector2(100, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -100.0
+offset_right = 114.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+flip_h = true
+
+[node name="BeardImage" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/CharacterPanelLeft/VBoxContainer/CharacterPortrait" unique_id=132383195]
+custom_minimum_size = Vector2(100, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -100.0
+offset_right = 114.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+flip_h = true
 
 [node name="CharacterNameText" type="RichTextLabel" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/CharacterPanelLeft/VBoxContainer" unique_id=1889320099]
 layout_mode = 2
