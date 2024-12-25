@@ -18,6 +18,15 @@ logger.setLevel(logging.DEBUG)
 
 MAX_RETRIES = 5
 
+template = """
+{base_foundation_prompt}
+
+YOUR CURRENT IDENTITY:
+{character_sheet}
+
+Internal System Instruction: You have just walked into the shop. You see the Shopkeeper (Player) behind the counter. Approach them and start the negotiation
+"""
+
 class ToolDoesNotExist(Exception):
     pass
 
@@ -35,9 +44,9 @@ class LLMAgent:
         self.llm = llm
         self.tools = tools
         self.llm = llm.bind_tools(tools) 
+        system_prompt = template.format(base_foundation_prompt=system_template, character_sheet=character_template)
         self.prompt_template = ChatPromptTemplate([
-            ("system", system_template),
-            ("system", character_template),
+            ("system", system_prompt),
             MessagesPlaceholder("messages")
         ])
 
