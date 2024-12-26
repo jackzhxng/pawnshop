@@ -21,6 +21,8 @@ def buy(
     # Some database call here.
     return True
 
+
+
 class SellInput(BaseModel):
     item: str = Field(description="The name of the item being sold (e.g., 'Iron Sword')")
     price: int = Field(description="The price per unit in gold coins. Must be a positive integer.")
@@ -35,6 +37,17 @@ def sell(item: str, price: int, quantity: int) -> str:
     return f"Successfully sold {quantity} {item}(s) for {price} gold each."
 
 @tool
+def offer_item(item_name: str, price: int) -> str:
+    """
+    Use this to place an item from your pack onto the shop counter for the player to see.
+    This is NOT a sale. This is an invitation for the shopkeeper to negotiate.
+    You must call this tool before you are allowed to call the 'sell' tool.
+    Direction: NPC Pack -> Shop Counter.
+    """
+    # Logic: Flag this item as "on the table" in your game state
+    return f"You have placed {item_name} on the counter. You are asking for {price} gold each."
+
+@tool
 def leave_shop() -> bool:
     """
     Leaves the shop and concludes interactions with the shopkeeper.
@@ -46,7 +59,7 @@ def leave_shop() -> bool:
 # These names should be lowercased and match tool_call["name"].
 # Mark shop-interaction tools remote so the Godot client executes them and
 # returns structured results back to the server.
-REMOTE_TOOLS = {"get_inventory", "sell", "buy", "leave_shop"}
+REMOTE_TOOLS = {"get_inventory", "sell", "buy", "leave_shop", "offer_item"}
 
 @tool
 def get_inventory(npc_id: str) -> str:

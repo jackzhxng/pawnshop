@@ -6,10 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://emdbsrqeydi2" path="res://character_sprites/Masculine_A_default.png" id="4_fg4y7"]
 [ext_resource type="FontFile" uid="uid://cigy8hxwtcr72" path="res://Minecraft.ttf" id="5_jqtso"]
 
-[node name="HTTPExample" type="Node2D" unique_id=395514784 node_paths=PackedStringArray("send_button", "text_input")]
+[node name="Chat" type="Node2D" unique_id=395514784 node_paths=PackedStringArray("send_button", "text_input")]
 script = ExtResource("1_jqtso")
 send_button = NodePath("CanvasLayer/Control/MarginContainer/HBoxContainer/Chat/VBoxContainer/InputBox/Button")
 text_input = NodePath("CanvasLayer/Control/MarginContainer/HBoxContainer/Chat/VBoxContainer/InputBox/TextEdit")
+debug_mode = true
 
 [node name="HTTPRequest" type="HTTPRequest" parent="." unique_id=1376899148]
 unique_name_in_owner = true
@@ -18,11 +19,13 @@ unique_name_in_owner = true
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=1038437916]
 layout_mode = 3
-anchors_preset = 15
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -349.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control" unique_id=670408487]
 layout_mode = 1
@@ -133,7 +136,7 @@ size_flags_stretch_ratio = 3.0
 theme_override_colors/default_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_fonts/normal_font = ExtResource("5_jqtso")
 bbcode_enabled = true
-text = "..."
+text = "... "
 
 [node name="InputBox" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/Chat/VBoxContainer" unique_id=422486416]
 layout_mode = 2
@@ -165,7 +168,6 @@ custom_minimum_size = Vector2(64, 192)
 layout_mode = 2
 script = ExtResource("3_6kg6q")
 character_variation = "B"
-hair_variation = "B"
 
 [node name="CharacterImage" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/CharacterPanelLeft/VBoxContainer/CharacterPortrait" unique_id=919184875]
 custom_minimum_size = Vector2(100, 200)

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cb7j8tm6cdath"]
+
+[ext_resource type="PackedScene" uid="uid://b3ofhfeq61gkc" path="res://Chat.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://dbvqkwbbi873m" path="res://Inventory.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://iy3myk0sswvy" path="res://ShopCounter.gd" id="3_h2yge"]
+
+[node name="Main" type="Node2D" unique_id=1399486952]
+
+[node name="Chat" parent="." unique_id=395514784 instance=ExtResource("1_ig7tw")]
+
+[node name="Inventory" type="Node2D" parent="." unique_id=453516993 node_paths=PackedStringArray("chat_manager")]
+script = ExtResource("2_0xm2m")
+chat_manager = NodePath("../Chat")
+
+[node name="ShopCounter" type="Node2D" parent="." unique_id=1392807080 node_paths=PackedStringArray("chat_manager")]
+script = ExtResource("3_h2yge")
+chat_manager = NodePath("../Chat")

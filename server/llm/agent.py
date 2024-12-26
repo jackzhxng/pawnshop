@@ -24,7 +24,7 @@ template = """
 YOUR CURRENT IDENTITY:
 {character_sheet}
 
-Internal System Instruction: You have just walked into the shop. You see the Shopkeeper (Player) behind the counter. Approach them and start the negotiation
+Internal System Instruction: You have just walked into the shop. You see the Shopkeeper (Player) behind the counter. Approach them with the intention to either buy or sell an item.
 """
 
 class ToolDoesNotExist(Exception):
