@@ -64,6 +64,11 @@ func _on_request_completed(_result, _response_code, _headers, body):
 			return
 		elif obj.has("status") and obj["status"] == "tool_call":
 			var tc = obj["tool_call"]
+			# If the server provided the assistant's message alongside the tool call,
+			# append it to the chat before delegating the tool execution.
+			if obj.has("agent_message") and typeof(obj["agent_message"]) == TYPE_STRING and obj["agent_message"] != "":
+				messages.append("[b]Erik:[/b] " + obj["agent_message"])
+				refresh_text()
 			# Delegate tool execution to local handler which will emit a signal
 			# and wait for an explicit provide_tool_result call from scene nodes.
 			handle_tool_call(tc["name"].to_lower(), tc.get("args", {}), tc["id"])

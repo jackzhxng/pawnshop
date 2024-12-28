@@ -22,7 +22,15 @@ def inference():
 
     # If the agent returned a tool_call notification dict, forward as JSON.
     if isinstance(res, dict) and res.get("status") == "tool_call":
-        return jsonify(res), 202
+        # Also include the assistant's preceding message ("thought") so the
+        # client can render it along with the tool call prompt.
+        try:
+            last_ai_msg = example_agent.messages[-1]
+            agent_message = getattr(last_ai_msg, "content", None)
+        except Exception:
+            agent_message = None
+        enriched = {**res, "agent_message": agent_message}
+        return jsonify(enriched), 202
 
     # Otherwise return finished reply
     return jsonify({"status": "finished", "reply": res})

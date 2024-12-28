@@ -3,9 +3,20 @@ extends Node2D
 
 @export var chat_manager: ChatManager
 var offered_items = []
+@export var player_gold := 1000
+var _gold_label: Label
 
 func _ready():
 	chat_manager.tool_call_received.connect(handle_tool_call_received)
+
+	# Create a simple gold counter label and add to the counter node
+	_gold_label = Label.new()
+	_gold_label.name = "GoldLabel"
+	_gold_label.position = Vector2(20, 20)
+	_gold_label.anchor_left = 0
+	_gold_label.anchor_top = 0
+	update_gold_display()
+	add_child(_gold_label)
 
 	# For demo purposes, we hardcode some offered items. In a real game, these
 	# would likely be loaded from a file or generated dynamically.
@@ -18,7 +29,9 @@ func _ready():
 func display_offered_items():
 	# Remove previously displayed Item nodes so we don't duplicate on repeated calls
 	for child in get_children():
-		child.queue_free()
+		# Only remove Item nodes so UI elements like the gold label are preserved
+		if child is Item:
+			child.queue_free()
 
 	var center_x = 590
 	var spacing = 100
@@ -38,6 +51,7 @@ func display_offered_items():
 		item_node.position = Vector2(x_pos, 170)
 		item_node.scale = Vector2(4, 4)
 		item_node.item_name = item["name"]
+		item_node.item_price = item["price"]
 		add_child(item_node)
 		item_node.init()
 
@@ -56,20 +70,29 @@ func handle_tool_call_received(tool_name, args, id):
 	if tool_name == "sell":
 		var item_name = args.get("item", "")
 		var price = args.get("price", 0)
+		var quantity = args.get("quantity", 1)
 		if offered_items.all(func(item): return item["name"] != item_name):
 			chat_manager.provide_tool_result(id, {"success": false, "error": "Can't sell an item that was not offered"})
 			print("Attempted to sell an item that was not offered: %s" % item_name)
 			print("Current offered items: %s" % offered_items)
 			return
-		if item_name == "" or price <= 0:
-			chat_manager.provide_tool_result(id, {"success": false, "error": "Invalid item name or price"})
+		if item_name == "" or price <= 0 or quantity <= 0:
+			chat_manager.provide_tool_result(id, {"success": false, "error": "Invalid item name, price, or quantity"})
 			return
-		
-		# In a real game, you'd also want to check if the item is actually offered
-		# and handle inventory updates, gold transactions, etc.
-		# Remove the sold item from the offered_items list and update display
+
+		# Total cost to the player
+		var total_cost = price * quantity
+		if player_gold < total_cost:
+			chat_manager.provide_tool_result(id, {"success": false, "error": "Not enough gold"})
+			print("Player tried to buy %s x%d for %d gold but only has %d" % [item_name, quantity, total_cost, player_gold])
+			return
+
+		# Deduct gold from the player
+		player_gold -= total_cost
+		update_gold_display()
+
+		# Remove sold item(s) from the offered_items list and update display
 		var removed = false
-		# Try to remove by matching both name and price first
 		for i in offered_items.size():
 			var it = offered_items[i]
 			if it["name"] == item_name:
@@ -79,8 +102,12 @@ func handle_tool_call_received(tool_name, args, id):
 
 		if removed:
 			display_offered_items()
-			print("Player sold %s for %d gold" % [item_name, price])
-			chat_manager.provide_tool_result(id, {"success": true})
+			print("Player bought %s x%d for %d gold" % [item_name, quantity, total_cost])
+			chat_manager.provide_tool_result(id, {"success": true, "gold_left": player_gold})
 		else:
 			# Shouldn't happen because we validated existence earlier, but handle just in case
 			chat_manager.provide_tool_result(id, {"success": false, "error": "Failed to remove offered item"})
+
+func update_gold_display():
+	if _gold_label != null:
+		_gold_label.text = str(player_gold) + "g"
