@@ -1,18 +1,18 @@
 [
 	{
-		"name": "Iron Shortsword",
-		"base_value": 10
-	},
-	{
-		"name": "Health Potion",
-		"base_value": 25
-	},
-	{
-		"name": "Treasure Map",
-		"base_value": 150
-	},
-	{
 		"name": "Gold Ingot",
-		"base_value": 500
+		"base_value": 500.0
+	},
+	{
+		"name": "Fine Ring",
+		"base_value": 250.0
+	},
+	{
+		"name": "Luxurious Pendant",
+		"base_value": 750.0
+	},
+	{
+		"name": "Precious Diamond",
+		"base_value": 1000.0
 	}
 ]

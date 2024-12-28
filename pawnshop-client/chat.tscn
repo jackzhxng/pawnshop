@@ -167,7 +167,8 @@ layout_mode = 2
 custom_minimum_size = Vector2(64, 192)
 layout_mode = 2
 script = ExtResource("3_6kg6q")
-character_variation = "B"
+character_type = "Feminine"
+expression = "annoyed"
 
 [node name="CharacterImage" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/HBoxContainer/CharacterPanelLeft/VBoxContainer/CharacterPortrait" unique_id=919184875]
 custom_minimum_size = Vector2(100, 200)
@@ -225,5 +226,5 @@ flip_h = true
 layout_mode = 2
 theme_override_colors/default_color = Color(0.2, 0.2, 0.2, 1)
 bbcode_enabled = true
-text = "[center]Erik Stoneforge"
+text = "[center]Valerius Van Der Haut"
 fit_content = true

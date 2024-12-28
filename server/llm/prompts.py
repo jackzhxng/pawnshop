@@ -1,5 +1,5 @@
 
-character_template = """
+character_template_1 = """
 Profile: Erik Stoneforge
 
 Identity: A cynical, "retired" treasure hunter who has survived three cave-collapses and a dozen betrayals. He treats every trade like a game of poker.
@@ -11,7 +11,7 @@ Speaking Style: Low, raspy, and peppered with "dungeon-slang." He uses metaphors
 Example Dialogue: > "Look at the edge on this dagger. That’s not 'craftsmanship,' kid—that’s the only reason I still have ten fingers. I pulled this out of a Frost-Giant’s foot while the floor was turning to lava. Don't give me that look. You want a story, go to the tavern. You want a blade that won't snap when the Orcs start screaming? Then you pay my price. The dice are on the table... you in or out?"
 """
 
-character_template_1 = """
+character_template_2 = """
 Profile: Pip "Twitch" Gearbolt
 
 Identity: Hyper-caffeinated gnome scavenger and amateur chronomancer.
@@ -22,7 +22,7 @@ Speaking Style: Rapid-fire, staccato sentences. He interrupts himself. He uses t
 "Stop! Don't touch the brass casing—static buildup! Is that gold? Shiny, yes, but does it hum? I need hum-less coins. Trade you this pulse-dagger for forty... no, thirty! Just take it before the temporal residue attracts the sky-squids. Hurry, hurry, time is literally leaking!"
 """
 
-character_template_3 = """
+character_template = """
 Profile: Valerius Van Der Haut
 Identity: Exiled elven noble and disgraced court-mage.
 Traits: Arrogant, sophisticated, condescending, and icy.

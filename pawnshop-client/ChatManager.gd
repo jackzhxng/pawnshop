@@ -59,7 +59,7 @@ func _on_request_completed(_result, _response_code, _headers, body):
 	if error == OK:
 		var obj = json.data
 		if obj.has("status") and obj["status"] == "finished":
-			messages.append("[b]Erik:[/b] " + obj["reply"])
+			messages.append("[b]Valerius:[/b] " + obj["reply"])
 			refresh_text()
 			return
 		elif obj.has("status") and obj["status"] == "tool_call":
@@ -67,7 +67,7 @@ func _on_request_completed(_result, _response_code, _headers, body):
 			# If the server provided the assistant's message alongside the tool call,
 			# append it to the chat before delegating the tool execution.
 			if obj.has("agent_message") and typeof(obj["agent_message"]) == TYPE_STRING and obj["agent_message"] != "":
-				messages.append("[b]Erik:[/b] " + obj["agent_message"])
+				messages.append("[b]Valerius:[/b] " + obj["agent_message"])
 				refresh_text()
 			# Delegate tool execution to local handler which will emit a signal
 			# and wait for an explicit provide_tool_result call from scene nodes.
@@ -80,7 +80,7 @@ func _on_request_completed(_result, _response_code, _headers, body):
 			
 			return
 	# Fallback: append raw text
-	messages.append("[b]Erik:[/b] " + text)
+	messages.append("[b]Valerius:[/b] " + text)
 	refresh_text()
 
 
