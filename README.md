@@ -10,8 +10,10 @@ Inspired by projects like https://arxiv.org/pdf/2304.03442, https://github.com/a
 ## Features different NPCs with different personalities
 
 Erik Stoneforge - cynical, superstitious, blunt
-https://github.com/user-attachments/assets/1b743ca7-7fc1-4360-8994-91d2eb213965
+
+https://github.com/user-attachments/assets/a280b9c4-f63b-4edb-a810-1b356a0022f2
 
 Valerius Van Der Haut - Poetic, rambly, sophisticated, condescending
-https://github.com/user-attachments/assets/91c7a7da-f3e3-4e30-922b-ecd9b4e96c85
+
+https://github.com/user-attachments/assets/2edc9d7c-ed9e-4a2c-9b71-e240255da2cd
 
