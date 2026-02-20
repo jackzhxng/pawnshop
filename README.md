@@ -2,11 +2,18 @@
 Inspired by projects like https://arxiv.org/pdf/2304.03442, https://github.com/altera-al/project-sid, and looking to play with AI agents
 
 ## Overview
-- Using an OpenAI API key or running local models with ollama
-- Building agent orchestration using LangChain
-- Experimenting with vector store for knowledge retrieval (FAISS)
-- Godot game engine as the client
+**LLM Integration**: 
+- LLM: The system can use OpenAI API (external) or Ollama-hosted models (local) interchangeably.
+- Agent Orchestration: The backend uses LangChain to implement custom chains for managing multi-step interactions (chaining reasoning, tools, memory retrieval)
+- Vector Store experiments: Experiments with a vector-store memory using FAISS for knowledge retrieval. Includes prototypes for storing conversation context or facts in a FAISS index to prepare for future memory-based recall
 
+**Backend:**
+- Uses [Flask](https://flask.palletsprojects.com/en/stable/) as a light HTTP API to expose endpoints
+
+**Frontend**
+- Game client is built with the [Godot Engine](https://godotengine.org/) which provides the UI, character portraits, and input / output for dialogue.
+- Uses Godot's networking (HTTPRequest) for calling the Python backend
+  
 ## Features different NPCs with different personalities
 
 Erik Stoneforge - cynical, superstitious, blunt
