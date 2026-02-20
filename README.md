@@ -2,10 +2,10 @@
 Inspired by projects like https://arxiv.org/pdf/2304.03442, https://github.com/altera-al/project-sid, and looking to play with AI agents
 
 ## Overview
-- Using external (OpenAI) and local (ollama) models
-- Building agent orchestration using Langchain
-- Experimenting with vector store for knowledge retrieval (FAISS) - not implemented in-game (yet!)
-- Uses Godot game engine as the client
+- Using an OpenAI API key or running local models with ollama
+- Building agent orchestration using LangChain
+- Experimenting with vector store for knowledge retrieval (FAISS)
+- Godot game engine as the client
 
 ## Features different NPCs with different personalities
 
